@@ -1,0 +1,123 @@
+#include <Arduino.h>
+#include <DabbleESP32.h>
+#include <M5Stack.h>
+#define CUSTOM_SETTINGS
+#define INCLUDE_GAMEPAD_MODULE
+#define posx 100 // cette fonction vas definir une valeur pour pouvoir la mdifier partout dans le code en même temps 
+#define posy 100
+
+void setup() {
+  M5.Lcd.setTextSize(4);
+  M5.begin(); // cela allume l'écran du m5 stack
+  Serial.begin(115200);   
+  Dabble.begin("mattis cordier"); // ceci est le nom de qui sera afficher sur dabble 
+}
+
+void loop() {
+  Dabble.processInput(); 
+  Serial.print("KeyPressed: ");
+
+  if (GamePad.isUpPressed()){
+    M5.Lcd.setTextColor(RED);
+    M5.Lcd.setCursor(posx, posy); // ici on utilise les fonction que l'on a defini plus tôt
+    M5.Lcd.print("Up");
+    Serial.print("Up");   // cela vas afficher "up" sur le m5
+    M5.Lcd.clear(BLACK);  // cette commande sert a éffacé l'écran du m5
+  }
+
+  if (GamePad.isDownPressed()){
+
+    M5.Lcd.setTextColor(BLUE);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Down");
+    Serial.print("Down");
+    M5.Lcd.clear(BLACK);
+  }
+
+  if (GamePad.isLeftPressed()){
+    M5.Lcd.setTextColor(GREEN);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Left");
+    Serial.print("Left");
+    M5.Lcd.clear(BLACK);
+  }
+
+  if (GamePad.isRightPressed()){
+    M5.Lcd.setTextColor(YELLOW);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Right");
+    Serial.print("Right");
+    M5.Lcd.clear(BLACK);
+  }
+
+  if (GamePad.isSquarePressed()){
+    M5.Lcd.setTextColor(0x7BE0);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Square");
+    Serial.print("Square");
+    M5.Lcd.clear(BLACK);
+  }
+
+  if (GamePad.isCirclePressed()){
+    M5.Lcd.setTextColor(CYAN);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Circle");
+    Serial.print("Circle");
+    M5.Lcd.clear(BLACK);
+  }
+
+  if (GamePad.isCrossPressed()){
+    M5.Lcd.setTextColor(PURPLE);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Cross");
+    Serial.print("Cross");
+    M5.Lcd.clear(BLACK);
+  }
+
+  if (GamePad.isTrianglePressed()){
+    M5.Lcd.setTextColor(MAROON);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Triangle");
+    Serial.print("Triangle");
+    M5.Lcd.clear(BLACK);
+  }
+
+  if (GamePad.isStartPressed()){
+    M5.Lcd.setTextColor(ORANGE);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Start");
+    Serial.print("Start");
+    M5.Lcd.clear(BLACK);
+  }
+
+  if (GamePad.isSelectPressed()){
+    M5.Lcd.setTextColor(DARKGREEN);
+    M5.Lcd.setCursor(posx, posy);
+    M5.Lcd.print("Select");
+    Serial.print("Select");
+    M5.Lcd.clear(BLACK);
+  }
+  Serial.print('\t');
+
+  int a = GamePad.getAngle();
+  Serial.print("Angle: ");
+  Serial.print(a);
+  Serial.print('\t');
+  int b = GamePad.getRadius();
+  Serial.print("Radius: ");
+  Serial.print(b);
+  Serial.print('\t');
+  float c = GamePad.getXaxisData();
+  Serial.print("x_axis: ");
+  Serial.print(c);
+  Serial.print('\t');
+  float d = GamePad.getYaxisData();
+  Serial.print("y_axis: ");
+  Serial.println(d);
+  Serial.println();
+
+
+  m5.Lcd.drawCircle(160,120,1,GREENYELLOW);  // cela permet de faire une crecle en 160 ; 120 
+  m5.Lcd.setCursor(c , d);
+
+}
